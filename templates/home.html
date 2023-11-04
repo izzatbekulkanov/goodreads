@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block title %} AuzCoder Books {% endblock %}
+
+{% block content %}
+	<div class="jumbotron jumbotronuz jumbotron-fluid">
+		<div class="container">
+			<h1 class="display-4">Kitoblar uchun izohlar</h1>
+			<p class="lead">
+				Bizning foydalanuvchilarimizning fikri!
+			</p>
+		</div>
+	</div>
+
+
+
+<div class="container posts-content">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for review in page_obj %}
+        <div class="col">
+            <div class="card h-100 mb-4">
+              <div class="card-body">
+                <div class="media mb-3">
+                  <img src="{{ review.user.profile_picture.url }}" class="d-block ui-w-40 rounded-circle" alt="">
+                  <div class="media-body ml-3">
+                    {{ review.user.first_name.title }} {{ review.user.last_name.title }}
+                    <div class="text-muted small">{{ review.created_at }} da izoh qoldirilgan!</div>
+                  </div>
+                </div>
+
+                <p>
+                  {{ review.comment | slice:"100" }}...
+                </p>
+                <img class="card-img-top center" src="{{ review.book.cover_picture.url }}">
+              </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="mt-5">
+    <nav aria-label="">
+      <ul class="pagination justify-content-center">
+        {% if page_obj.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page=1" >&laquo; Boshi</a></li>
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+        {% endif %}
+          <li class="page-item active"> <a class="page-link" href="/">{{ page_obj.number }}</a></li>
+        {% if page_obj.has_next %}
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Oxirgi &raquo;</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+</div>
+
+
+
+</div>
+
+
+
+
+{% endblock content %}

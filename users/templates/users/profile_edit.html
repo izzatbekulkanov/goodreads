@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+<h1 class="my-5 text-center">Profilni taxrirlash</h1>
+<div class="row justify-content-center">
+    <div class="col-4">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form | crispy }}
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <button class="btn btn-success my-3 " type="submit">Yangilash</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% block title %}Book Detail Page{% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="jumbotron jumbotron-fluid my-5 mx-5">
+  <div class="container">
+    <h1 class="display-4">{{ book.title }}</h1><hr>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-3">
+     <img  src="{{ book.cover_picture.url }}"
+           class="img-thumbnail shadow-2-strong rounded-5 mb-4 book_pic" alt="" >
+  </div>
+<div class="col-7">
+    <p class="text-center text-lg-start mb-2 m-lg-0">
+        Muallif:
+
+        {% for a in book.authors %}
+            {% if forloop.last %}
+                {{a.author.full_name}}
+            {% else %}
+                {{a.author.full_name}},
+            {% endif %}
+        {% endfor %}
+
+        {% for book_author in bookauthor_set.all %}
+            {% if forloop.last %}
+                {{ book_author.author.full_name }}
+            {% else %}
+                {{ book_author.author.full_name }},
+            {% endif %}
+        {% endfor %}{{ bookauthor_set.all }}
+    </p><br>
+    <span class="text-center text-lg-start mb-3 m-lg-0" > ISBN:  <u>{{ book.isbn }}</u> </span>
+
+    <p class="my-3" >{{ book.description }}</p>
+</div>
+</div>
+
+    <div class="d-flex justify-content-center pt-3 pb-2">
+<!--        <input type="text" name="text" placeholder="+ Add a note" class="form-control addtxt">-->
+        <form method="post" action="{% url 'books:reviews' book.id %}">
+            {% csrf_token %}
+            {{ review_form | crispy }}
+            <button class="btn btn-outline-success">Izoh qoldirish</button>
+        </form>
+    </div>
+
+<div class="container">
+    {% if book.bookreview_set_exists.all %}
+        <h4>Izohlar</h4><hr>
+
+    {% endif %}
+        <div class="container justify-content-center mt-5 border-left border-right">
+          {% for review in book.bookreview_set.all %}
+            <div class="container mt-5">
+                <div class="d-flex justify-content-center row">
+                    <div class="col-md-6">
+                        <div class="bg-white comment-section">
+                            <div class="d-flex flex-row user p-2"><img class="rounded-circle" src="{{ review.user.profile_picture.url }}" width="50">
+                                <div class="d-flex flex-column mx-3 ml-3">
+                                    <span class="name font-weight-bold">
+                                        {{ review.user.first_name }} {{ review.user.last_name.title }}
+                                    </span>
+                                    <span class="fw-lighter">Vaqt: {{ review.created_at | date:'d-m-Y, H:m ' }}</span></div>
+                            </div>
+                            <div class="mt-2 p-2">
+                                <p class="comment-content font-monospace">{{ review.comment }}</p>
+                            </div>
+
+                            <div class="d-flex justify-content-between p-3 border-top"><span>Berilgan baxo: </span>
+                                <div class="d-flex align-items-center border-left px-3 comments"><i class="fa fa-comment"></i><span class="ml-2">{{ review.start_give }}</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>{% endfor %}
+        </div>
+</div>
+
+
+
+
+{% endblock %}
+

@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <div class="row mb-5">
+    <div class="col-4">
+      <form class="d-flex" method="get">
+        <input class="form-control me-2" type="text" placeholder="Kitob qidirish..." name="q" value="{{ search_query }}">
+        <button class="btn btn-outline-success">Qidiruv</button>
+      </form>
+    </div>
+  </div>
+
+{% if page_obj %}
+  <div class="row row-cols-1 row-cols-md-3 g-4 ">
+      {% for book in page_obj.object_list %}
+        <div class="col">
+          <div class="card h-100">
+            <img src="{{ book.cover_picture.url }}" class="card-img-top book_pic" alt="Hollywood Sign on The Hill"/>
+            <div class="card-body">
+              <h5 class="card-title font-monospace">{{ book.title }}</h5>
+              <p class="card-text small">
+                  {{ book.description | slice:"150" }}...
+              </p>
+            </div>
+              <a href="{% url 'books:detail' book.id %}" class="btn btn-outline-primary">Ko'rish...</a>
+            </a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="mt-5">
+        <nav aria-label="">
+          <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page=1" >&laquo; Boshi</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+            {% endif %}
+              <li class="page-item active"> <a class="page-link" href="/static">{{ page_obj.number }}</a></li>
+            {% if page_obj.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Oxirgi &raquo;</a></li>
+            {% endif %}
+          </ul>
+        </nav>
+    </div>
+    {% else %}
+      <div class="jumbotron jumbotronuz jumbotron-fluid my-5">
+        <div class="container">
+          <h2 class="display-6 text-center font-monospace font-weight-bolder">Kitoblar ro'yxati bo'sh bo'lishi mumkin!</h2>
+        </div>
+      </div>
+    {% endif %}
+
+
+{% endblock %}
+
