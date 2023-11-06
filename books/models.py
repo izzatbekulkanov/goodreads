@@ -42,7 +42,7 @@ class BookReview(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     comment = models.TextField()
-    start_give = models.IntegerField(
+    stars_give = models.IntegerField(
         validators=[MinValueValidator(1), MaxValueValidator(5)]
     )
     created_at = models.DateTimeField(default=timezone.now)

@@ -23,8 +23,8 @@ admin.site.register(Author, AuthorAdmin)
 #Book review modeli
 class BookReviewAdmin(admin.ModelAdmin):
     search_fields = ('user', 'book', 'start_give')
-    list_display = ('user', 'book', 'start_give', 'comment')
-    list_filter = ('start_give',)
+    list_display = ('user', 'book', 'stars_give', 'comment')
+    list_filter = ('stars_give',)
 
 admin.site.register(BookReview, BookReviewAdmin)
 

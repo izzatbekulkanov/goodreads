@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="desc">
     <meta name="keywords" content="content">
-    <title>{% block title %} AuzCoder Books {% endblock %}</title>
+    <title>{% block title %} ULDEVUZ Books {% endblock %}</title>
 
     <!-- Bootstrap CSS -->
 <!--    https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist-->
@@ -19,6 +19,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <link href="{% static 'css/main.css' %}" rel="stylesheet" type="text/css">
+<!--    <link href="{% static 'css/main.css' %}" rel="stylesheet" type="text/css">-->
 </head>
 <body class="">
 
@@ -41,7 +42,7 @@
 
     <div class="mx-5 d-flex">
       {% if request.user.is_authenticated %}
-        <img class="profile_pic_admin mt-2 mt-lg-0" src="{{ user.profile_picture.url }}" alt="{{ user.profile_picture.name }} ">
+        <img class="profile_pic_admin mt-2 mt-lg-0 header_image" src="{{ user.profile_picture.url }}" alt="{{ user.profile_picture.name }} ">
         <ul class="navbar-nav me-5 d-block">
           <li class="nav-item dropdown">
                <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
