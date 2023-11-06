@@ -147,6 +147,11 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'izzatbekulkanov@gmail.com'
 EMAIL_HOST_PASSWORD = 'Qwerty@123456.uz'
 
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 10
+}
+
 JAZZMIN_SETTINGS = {
     # title of the window (Will default to current_admin_site.site_title if absent or None)
     "site_title": "Library Admin",

@@ -16,8 +16,8 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class BookReviewSerializer(serializers.ModelSerializer):
-    book = BookSerializer()
-    user = UserSerializer()
+    book = BookSerializer(read_only=True)
+    user = UserSerializer(read_only=True)
 
     class Meta:
         model = BookReview
